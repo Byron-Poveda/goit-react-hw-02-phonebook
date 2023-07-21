@@ -11,6 +11,7 @@ export default class Input extends Component {
     lable: PropTypes.string,
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
+    onBlur: PropTypes.bool,
   };
   static defaultProps = {
     type: '',
@@ -19,7 +20,7 @@ export default class Input extends Component {
     pattern: '',
     title: '',
     label: '',
-    placeholder: "",
+    placeholder: '',
     onChange: () => {},
   };
   // constructor(props) {
