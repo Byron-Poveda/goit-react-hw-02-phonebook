@@ -3,24 +3,19 @@ import './phonebook.css';
 import { nanoid } from 'nanoid';
 import ContactForm from './contactForm/ContactForm';
 import Filter from 'components/filter/Filter';
-import Button from 'components/button/Button';
-import Contacs from './contacts/Contacts';
+import ContactList from './contactList/ContactList';
 export default class Phonebook extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      form: {
-        name: '',
-        number: '',
-      },
       contactList: [],
       contactsFiltered: [],
     };
-    this.submitForm = this.submitForm.bind(this);
+    this.addContact = this.addContact.bind(this);
     this.handlerFilter = this.handlerFilter.bind(this);
     this.deleteContact = this.deleteContact.bind(this);
   }
-  submitForm(e) {
+  addContact(e) {
     e.preventDefault();
     const form = e.currentTarget;
     const name = form.elements.name.value;
@@ -65,33 +60,20 @@ export default class Phonebook extends Component {
       contactsFiltered: results,
     });
   }
+  contactList() {
+    return this.state.contactsFiltered;
+  }
   render() {
-    const { contactsFiltered } = this.state;
     return (
       <div className="phonebook">
         <h1>Phonebook</h1>
-        <ContactForm submitForm={this.submitForm} />
+        <ContactForm submitForm={this.addContact} />
         <h1>Contacts</h1>
         <Filter onChange={this.handlerFilter} />
-        <ul>
-          {contactsFiltered.map(contact => (
-            <li key={contact.id}>
-              <Contacs
-                name={contact.form.name}
-                number={parseInt(contact.form.number)}
-                id={contact.id}
-                deleteContact={this.deleteContact}
-              />
-              <Button
-                type={'button'}
-                text={'Delete'}
-                onClick={() => {
-                  this.deleteContact(contact.id);
-                }}
-              />
-            </li>
-          ))}
-        </ul>
+        <ContactList
+          contacts={this.contactList()}
+          deleteContact={this.deleteContact}
+        />
       </div>
     );
   }

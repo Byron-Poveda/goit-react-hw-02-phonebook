@@ -5,6 +5,15 @@ import Button from 'components/button/Button';
 export default class ContactForm extends Component {
   static propTypes = { submitForm: PropTypes.func };
   static defaultProps = { submitForm: () => {} };
+  constructor(props) {
+    super(props);
+    this.state = {
+      form: {
+        name: '',
+        number: '',
+      },
+    };
+  }
   render() {
     const { submitForm } = this.props;
     return (
