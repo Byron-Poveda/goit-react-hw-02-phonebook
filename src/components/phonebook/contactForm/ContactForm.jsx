@@ -8,16 +8,23 @@ export default class ContactForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      form: {
-        name: '',
-        number: '',
-      },
+      name: '',
+      number: '',
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleSubmit(e) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const name = form.elements.name.value;
+    const number = form.elements.number.value;
+    this.props.submitForm(name, number);
+    form.reset();
   }
   render() {
     const { submitForm } = this.props;
     return (
-      <form className="form-contact" onSubmit={submitForm}>
+      <form className="form-contact" onSubmit={this.handleSubmit}>
         <Input
           type={'text'}
           name={'name'}

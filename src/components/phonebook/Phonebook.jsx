@@ -9,46 +9,33 @@ export default class Phonebook extends Component {
     super(props);
     this.state = {
       contactList: [],
-      contactsFiltered: [],
+      filter: '',
     };
     this.addContact = this.addContact.bind(this);
-    this.handlerFilter = this.handlerFilter.bind(this);
+    this.handleFilterValue = this.handleFilterValue.bind(this);
     this.deleteContact = this.deleteContact.bind(this);
   }
-  addContact(e) {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const name = form.elements.name.value;
-    const number = form.elements.number.value;
-
+  addContact(name, number) {
     // Verificar si el contacto ya existe en la lista
     const contactExists = this.state.contactList.some(
-      contact => contact.form.name === name
+      contact => contact.name === name
     );
 
     if (contactExists) {
       alert(`${name} is already in contacts`);
-      form.reset();
       return;
     }
-    const newContact = { form: { name, number }, id: nanoid() };
+    const newContact = { name, number, id: nanoid() };
 
     this.setState(prevState => ({
-      form: { name: '', number: '' },
+      name: '',
+      number: '',
       contactList: [...prevState.contactList, newContact],
-      contactsFiltered: [...prevState.contactsFiltered, newContact],
     }));
-
-    form.reset();
   }
-  handlerFilter(e) {
-    const results = this.state.contactList.filter(contact => {
-      return contact.form.name
-        .toLowerCase()
-        .includes(e.target.value.toLowerCase());
-    });
+  handleFilterValue(e) {
     this.setState({
-      contactsFiltered: results,
+      filter: e.target.value,
     });
   }
   deleteContact(id) {
@@ -57,21 +44,21 @@ export default class Phonebook extends Component {
     });
     this.setState({
       contactList: results,
-      contactsFiltered: results,
     });
   }
-  contactList() {
-    return this.state.contactsFiltered;
-  }
   render() {
+    const { filter, contactList } = this.state;
+    const filteredContacts = contactList.filter(contact => {
+      return contact.name.toLowerCase().includes(filter.toLowerCase());
+    });
     return (
       <div className="phonebook">
         <h1>Phonebook</h1>
         <ContactForm submitForm={this.addContact} />
         <h1>Contacts</h1>
-        <Filter onChange={this.handlerFilter} />
+        <Filter onChange={this.handleFilterValue} />
         <ContactList
-          contacts={this.contactList()}
+          contacts={filteredContacts}
           deleteContact={this.deleteContact}
         />
       </div>
