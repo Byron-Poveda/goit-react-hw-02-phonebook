@@ -19,8 +19,8 @@ export default class ContactList extends Component {
         {contacts.map(contact => (
           <li key={contact.id}>
             <Contacs
-              name={contact.form.name}
-              number={parseInt(contact.form.number)}
+              name={contact.name}
+              number={parseInt(contact.number)}
               id={contact.id}
               deleteContact={this.deleteContact}
             />
