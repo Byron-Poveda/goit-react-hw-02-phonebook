@@ -22,7 +22,6 @@ export default class ContactForm extends Component {
     form.reset();
   }
   render() {
-    const { submitForm } = this.props;
     return (
       <form className="form-contact" onSubmit={this.handleSubmit}>
         <Input
