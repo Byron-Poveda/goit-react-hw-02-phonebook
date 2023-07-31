@@ -7,6 +7,7 @@ import ContactList from './contactList/ContactList';
 export default class Phonebook extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       contactList: [],
       filter: '',
@@ -45,6 +46,16 @@ export default class Phonebook extends Component {
     this.setState({
       contactList: results,
     });
+  }
+  componentDidMount() {
+    const localContactList =
+      JSON.parse(localStorage.getItem('phonebook')) || [];
+    this.setState({ contactList: localContactList });
+  }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.state.contactList !== prevState.contactList) {
+      localStorage.setItem('phonebook', JSON.stringify(this.state.contactList));
+    }
   }
   render() {
     const { filter, contactList } = this.state;
