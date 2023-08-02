@@ -14,10 +14,18 @@ const DivPhonebook = styled.div`
 const Phonebook = () => {
   const [contactList, setContactList] = useState([]);
   const [filter, setFilter] = useState('');
+  const [isMounted, setIsMounted] = useState(false); // Nuevo estado para verificar si el componente está montado
+
   useEffect(() => {
-    localStorage.setItem('phonebook', JSON.stringify(contactList));
-  }, [contactList]);
+    if (isMounted) {
+      // Evitar que el useEffect se ejecute al recargar la página
+      localStorage.setItem('phonebook', JSON.stringify(contactList));
+      console.log('update', localStorage.getItem('phonebook'));
+    }
+  }, [contactList, isMounted]);
+
   useEffect(() => {
+    setIsMounted(true); // Establecer isMounted en true una vez que el componente se ha montado
     const localContactList =
       JSON.parse(localStorage.getItem('phonebook')) || [];
     setContactList(localContactList);
