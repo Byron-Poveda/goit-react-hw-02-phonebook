@@ -1,24 +1,18 @@
+import React from 'react';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
 
-export default class Button extends Component {
-  static propTypes = {
-    submit: PropTypes.string,
-    text: PropTypes.string,
-    onClick: PropTypes.func,
-  };
-  static defaultProps = {
-    submit: '',
-    text: '',
-    onClick: () => {},
-  };
+const Button = ({ submit = '', text = '', onClick = () => {} }) => {
+  return (
+    <button type={submit} onClick={onClick}>
+      {text}
+    </button>
+  );
+};
 
-  render() {
-    const { submit, text, onClick } = this.props;
-    return (
-      <button type={submit} onClick={onClick}>
-        {text}
-      </button>
-    );
-  }
-}
+Button.propTypes = {
+  submit: PropTypes.string,
+  text: PropTypes.string,
+  onClick: PropTypes.func,
+};
+
+export default Button;

@@ -1,7 +1,7 @@
 import React from 'react';
 import Phonebook from './phonebook/Phonebook';
-function App() {
+const App = () => {
   return <Phonebook />;
-}
+};
 
 export default App;

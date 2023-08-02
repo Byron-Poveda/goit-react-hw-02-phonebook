@@ -1,14 +1,10 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
 import Input from 'components/input/Input';
-export default class Filter extends Component {
-  static propTypes = { onChnage: PropTypes.func };
-  static defaultProps = { onChange: () => {} };
 
-  render() {
-    const { onChange } = this.props;
-    return (
-      <Input
+const Filter=({onChange=()=>{}})=> {
+  return (
+    <Input
         type={'text'}
         name={'filter'}
         label={'Search Contact'}
@@ -18,6 +14,29 @@ export default class Filter extends Component {
           onChange(e);
         }}
       />
-    );
-  }
+  )
 }
+
+Filter.propTypes = { onChnage: PropTypes.func };
+
+export default Filter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
