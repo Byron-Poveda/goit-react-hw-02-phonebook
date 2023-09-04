@@ -11,7 +11,7 @@ const Filter=({onChange=()=>{}})=> {
         autoComplete={'off'}
         placeholder={'Search'}
         onChange={e => {
-          onChange(e);
+          onChange(e.target.value);
         }}
       />
   )

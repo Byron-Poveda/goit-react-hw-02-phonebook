@@ -1,8 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Input from 'components/input/Input';
 import Button from 'components/button/Button';
 import styled from 'styled-components';
+import { nanoid } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
+import { addContact } from 'redux/phonebookSlice';
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -12,13 +14,14 @@ const Form = styled.form`
     width: 100px;
   }
 `;
-const ContactForm = ({ submitForm = () => {} }) => {
+const ContactForm = () => {
+  const dispatch = useDispatch();
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
     const name = form.elements.name.value;
     const number = form.elements.number.value;
-    submitForm(name, number);
+    dispatch(addContact({name, number, id: nanoid()}))
     form.reset();
   };
   return (
@@ -46,6 +49,5 @@ const ContactForm = ({ submitForm = () => {} }) => {
   );
 };
 
-ContactForm.propTypes = { submitForm: PropTypes.func };
 
 export default ContactForm;
