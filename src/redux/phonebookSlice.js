@@ -18,10 +18,6 @@ export const phonebookSlice = createSlice({
         alert(`${action.payload.name} is already in contacts`);
         return;
       }
-      if (Array.isArray(action.payload))
-        return action.payload.forEach((contact) =>
-          state.contacts.push(contact)
-        );
       state.contacts.push(action.payload);
     },
     deleteContact: (state, action) => {
