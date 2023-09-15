@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   contacts: [],
-  originalContacts: [],
+  filter: "",
 //   para realizar la busqueda
 };
 
@@ -23,24 +23,14 @@ export const phonebookSlice = createSlice({
           state.contacts.push(contact)
         );
       state.contacts.push(action.payload);
-      state.originalContacts = state.contacts.slice(); // Copia del estado original
     },
     deleteContact: (state, action) => {
       state.contacts = state.contacts.filter(
         (contact) => contact.id !== action.payload
       );
-      state.originalContacts = state.contacts.slice(); // Copia del estado original
     },
     searchContact: (state, action) => {
-      if (action.payload) {
-        // Aplicar filtro de búsqueda
-        state.contacts = state.originalContacts.filter((contact) =>
-          contact.name.toLowerCase().includes(action.payload.toLowerCase())
-        );
-      } else {
-        // Restaurar el estado original cuando se borra la búsqueda
-        state.contacts = state.originalContacts.slice();
-      }
+      state.filter = action.payload 
     },
   },
 });
