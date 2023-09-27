@@ -1,21 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Contacs from '../contacts/Contacts';
 import Button from 'components/button/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact } from 'redux/phonebookSlice';
+import { fetchAll, deleteContact } from 'redux/thunks';
 const ContactList = () => {
   const dispatch = useDispatch()
-  const phonebook = useSelector((state) => state.phonebook.contacts)
+  const contactList = useSelector((state) => state.phonebook.contacts.items)
   const filter = useSelector((state) => state.phonebook.filter)
+  const loader = useSelector((state) => state.phonebook.contacts.isLoading)
+
+  useEffect(() => {
+    dispatch(fetchAll());
+  }, [dispatch]);
+
   return (
-    <ul>
-      {phonebook.map(contact => (
+    <>
+    {
+      loader ? <h1>Loading...</h1> : 
+      <ul>
+      {contactList.map(contact => (
         contact.name.toLowerCase().includes(filter.toLowerCase()) ? <li key={contact?.id || ''}>
         <Contacs
           name={contact?.name || ''}
-          number={parseInt(contact?.number || '')}
-          id={contact?.id || ''}
-          deleteContact={deleteContact}
+          number={contact?.phone || ''}
         />
         <Button
           type={'button'}
@@ -27,6 +34,8 @@ const ContactList = () => {
       </li> : ''
       ))}
     </ul>
+    }
+    </>
   );
 };
 

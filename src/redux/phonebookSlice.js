@@ -1,29 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  contacts: [],
-  filter: "",
-//   para realizar la busqueda
+  contacts: {
+    items: [],
+    isLoading: false,
+    error: null
+  },
+  filter: ""
 };
 
 export const phonebookSlice = createSlice({
   name: "phonebook",
   initialState,
   reducers: {
-    addContact: (state, action) => {
-      const contactExists = state.contacts.some(
-        (contact) => contact.name.toLowerCase() === action.payload.name.toLowerCase()
-      );
-      if (contactExists) {
-        alert(`${action.payload.name} is already in contacts`);
-        return;
-      }
-      state.contacts.push(action.payload);
+    initLoading:(state, action) => {
+      state.isLoading = action.payload
     },
-    deleteContact: (state, action) => {
-      state.contacts = state.contacts.filter(
-        (contact) => contact.id !== action.payload
-      );
+    setContacts: (state, action) => {
+      state.contacts.items = action.payload.contacts;
     },
     searchContact: (state, action) => {
       state.filter = action.payload 
@@ -31,6 +25,6 @@ export const phonebookSlice = createSlice({
   },
 });
 
-export const { addContact, deleteContact, searchContact } = phonebookSlice.actions;
+export const { initLoading, setContacts, searchContact } = phonebookSlice.actions;
 
 export default phonebookSlice.reducer;

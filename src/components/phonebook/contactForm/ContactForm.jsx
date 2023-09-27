@@ -3,8 +3,8 @@ import Input from 'components/input/Input';
 import Button from 'components/button/Button';
 import styled from 'styled-components';
 import { nanoid } from '@reduxjs/toolkit';
-import { useDispatch } from 'react-redux';
-import { addContact } from 'redux/phonebookSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from 'redux/thunks';
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -16,12 +16,14 @@ const Form = styled.form`
 `;
 const ContactForm = () => {
   const dispatch = useDispatch();
+  const phonebook = useSelector((state) => state.phonebook.contacts.items)
+
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
     const name = form.elements.name.value;
-    const number = form.elements.number.value;
-    dispatch(addContact({name, number, id: nanoid()}))
+    const phone = form.elements.phone.value;
+    dispatch(addContact({name, phone, id: nanoid(), createdAt: new Date()}, phonebook))
     form.reset();
   };
   return (
@@ -39,10 +41,9 @@ const ContactForm = () => {
       />
       <Input
         type={'number'}
-        name={'number'}
-        label={'Number'}
-        placeholder={'Number'}
-        autoComplete={'off'}
+        name={'phone'}
+        label={'Phone'}
+        placeholder={'Phone'}
       />
       <Button type={'submit'} text={'Add Contact'} />
     </Form>
