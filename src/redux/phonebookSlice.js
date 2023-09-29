@@ -24,6 +24,7 @@ export const phonebookSlice = createSlice({
   extraReducers:{
     [fetchContacts.pending](state) {
       state.isLoading = true
+      state.error = null
     },
     [fetchContacts.fulfilled](state, action) {
       state.contacts = action.payload
