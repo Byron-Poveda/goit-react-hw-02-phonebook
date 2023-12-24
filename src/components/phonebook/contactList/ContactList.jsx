@@ -7,11 +7,15 @@ const ContactList = () => {
   const dispatch = useDispatch()
   const contactList = useSelector((state) => state.phonebook.contacts)
   const filter = useSelector((state) => state.phonebook.filter)
-  const loader = useSelector((state) => state.phonebook.contacts.isLoading)
+  const loader = useSelector((state) => state.phonebook.isLoading)
 
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
+
+  useEffect(() => {
+    console.log("loader:", loader)
+  }, [loader]);
 
   const contactsLength = []
   contactList.map(contact => (
