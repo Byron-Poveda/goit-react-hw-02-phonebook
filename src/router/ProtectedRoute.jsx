@@ -8,8 +8,9 @@ const ProtectedRoute = ({ title, redirectRoute, element, checkAuth }) => {
   const [token, setToken] = useState(tokenStore); 
   
     useEffect(()=>{
+      console.log(token.value, tokenStore)
       setToken(tokenStore)
-    },[tokenStore])
+    },[tokenStore, token.value])
   
   try {
     document.title = (title ? title + ' | ' : '') + 'Phonebook';

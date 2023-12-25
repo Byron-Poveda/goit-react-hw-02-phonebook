@@ -6,6 +6,8 @@ import Input from 'components/input/Input'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginUser } from 'redux/thunks'
 import { Notify } from 'notiflix'
+import { globalIcons } from '../../assets/globalIcons.js'
+import Button from 'components/button/Button.jsx'
 
 function Login() {
   const [email, setEmail] = useState('')
@@ -21,29 +23,22 @@ function Login() {
   }
 
   return (
-    // ver como mejorar la imagen de fondo
     <div className="h-screen flex justify-between">
-      <div className="hidden md:flex w-full md:w-1/2
-      justify-around items-center"
-      style={{ background: 'linear-gradient(rgb(0 0 0), rgb(0 0 0 / 60%)), url(https://m.media-amazon.com/images/I/51-vlTGJ-EL.png) center center', backgroundRepeat: 'no-repeat' }}>
-        <div 
-              className=" 
-              bg-black 
-              opacity-20 
-              inset-0 
-              z-0"
-              >
-              </div>
-        <div className="mx-auto">
-          <h1 className="text-white font-bold text-[48px] font-rubik">Contacts <span className='text-phonebook-indigo text-[56px] uppercase'>App</span></h1>
-          <p className="text-white mt-1">The simplest app to use</p>
-          <div className="flex justify-center md:justify-start mt-6">
-              <Link 
-                to='/signup'
-                className="hover:bg-phonebook-indigo hover:text-white hover:-translate-y-1 transition-all duration-500 bg-white text-phonebook-indigo-dark mt-4 px-4 py-2 rounded-2xl font-bold mb-2"
-              >
-                Get Started
-              </Link>
+      <div className="hidden relative md:flex w-full md:w-1/2"
+      >
+        <img src={globalIcons.loginBg} alt="login background" />
+        <div className="mx-auto absolute top-0 left-0 w-full bg-[#000000cc] h-screen flex items-center">
+          <div className='flex flex-col mx-auto'>
+            <h1 className="text-white font-bold text-[48px] font-rubik">Contacts <span className='text-phonebook-indigo-dark text-[56px] uppercase'>App</span></h1>
+            <p className="text-white mt-1">The simplest app to use</p>
+            <div className="flex justify-center md:justify-start mt-6">
+                <Link
+                  to='/signup'
+                  className="hover:bg-phonebook-indigo hover:text-white hover:-translate-y-1 transition-all duration-500 bg-white text-phonebook-indigo-dark mt-4 px-4 py-2 rounded-2xl font-bold mb-2"
+                >
+                  Get Started
+                </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -74,7 +69,14 @@ function Login() {
               <FontAwesomeIcon icon={faLock} className='text-[#9ca3af]'></FontAwesomeIcon>
             </Input>
           </div>
-          <button type="submit" className="block w-full bg-phonebook-indigo mt-6 py-2 rounded-2xl hover:bg-phonebook-indigo-dark hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2">Login</button>
+          <Button
+            type='submit'
+            classButton='mt-[20px]'
+            loading={loading}
+            isDisabled={loading}
+          >
+            Login
+          </Button>
           <div className="flex justify-between mt-4">
             <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all">Forgot Password ?</span>
             <Link 

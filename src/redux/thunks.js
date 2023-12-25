@@ -113,7 +113,7 @@ export const loginUser = createAsyncThunk(
         userData: response.data.User,
       };
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.response.data.message);
+      return thunkAPI.rejectWithValue('Email or password incorret');
     }
   }
 );
@@ -142,7 +142,7 @@ export const signUpUser = createAsyncThunk(
         currentUser: response.data.user,
       };
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.response?.data?.errors?.password?.message || 'El Email Esta En Uso!');
+      return thunkAPI.rejectWithValue(e.response?.data?.errors?.password?.message || 'Email un Use!');
     }
   }
 );
@@ -153,7 +153,7 @@ export const logOutUser = createAsyncThunk(
     try {
       const token = thunkAPI.getState().auth.token;
 
-      const response = await axios.post(`${baseUrlAuth}/logout`, null, {
+      await axios.post(`${baseUrlAuth}/logout`, null, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -162,7 +162,7 @@ export const logOutUser = createAsyncThunk(
       localStorage.removeItem('token');
       localStorage.removeItem('userCurrent');
 
-      return response.data;
+      return '';
     } catch (e) {
       return thunkAPI.rejectWithValue(e.response.data.message);
     }

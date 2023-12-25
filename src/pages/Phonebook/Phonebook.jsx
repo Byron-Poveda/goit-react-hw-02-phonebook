@@ -4,6 +4,7 @@ import Filter from 'components/filter/Filter';
 import ContactList from '../../components/phonebook/contactList/ContactList';
 import { useDispatch } from 'react-redux';
 import { searchContact } from 'redux/phonebookSlice';
+import { logOutUser } from 'redux/thunks';
 
 const Phonebook = () => {
   const dispatch = useDispatch()
@@ -15,6 +16,7 @@ const Phonebook = () => {
       <h1>Contacts</h1>
       <Filter  onChange={filterFunction}/>
       <ContactList />
+      <button onClick={()=>dispatch(logOutUser())}>salir</button>
     </div>
   );
 };
