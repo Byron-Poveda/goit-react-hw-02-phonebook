@@ -44,20 +44,20 @@ function Login() {
       </div>
       <div className="flex w-full md:w-1/2 justify-center items-center bg-white">
         <div className="w-full px-[20px]">
-        <form onSubmit={submitForm} className="bg-white rounded-md shadow-2xl p-5 min-w-[340px] max-w-[480px] my-0 mx-auto">
-          <h1 className="text-gray-800 font-bold text-2xl mb-1">Hello!</h1>
-          <p className="text-sm font-normal text-gray-600 mb-8">Welcome Back</p>
-          <div className='flex flex-col gap-[20px]'>
-            <Input
-              modelValue={email}
-              required
-              disabled={loading}
-              type='email'
-              onChange={(e)=>setEmail(e.target.value)}
-              placeholder='Email Address'
-            >
-              <FontAwesomeIcon icon={faAt} className='text-[#9ca3af]'></FontAwesomeIcon>
-            </Input>
+          <form onSubmit={submitForm} className="bg-white border border-phonebook-indigo-dark rounded-md shadow-2xl p-5 min-w-[340px] max-w-[480px] my-0 mx-auto">
+            <h1 className="text-gray-800 font-bold text-2xl mb-1">Hello!</h1>
+            <p className="text-sm font-normal text-gray-600 mb-8">Welcome Back</p>
+            <div className='flex flex-col gap-[20px]'>
+              <Input
+                modelValue={email}
+                required
+                disabled={loading}
+                type='email'
+                onChange={(e)=>setEmail(e.target.value)}
+                placeholder='Email Address'
+              >
+                <FontAwesomeIcon icon={faAt} className='text-[#9ca3af]'></FontAwesomeIcon>
+              </Input>
             <Input
               modelValue={password}
               required
@@ -67,29 +67,28 @@ function Login() {
               placeholder='Password'
             >
               <FontAwesomeIcon icon={faLock} className='text-[#9ca3af]'></FontAwesomeIcon>
-            </Input>
-          </div>
-          <Button
-            type='submit'
-            classButton='mt-[20px]'
-            loading={loading}
-            isDisabled={loading}
-          >
-            Login
-          </Button>
-          <div className="flex justify-between mt-4">
-            <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all">Forgot Password ?</span>
-            <Link 
-              to='/signup'
-              className="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all"
+              </Input>
+            </div>
+            <Button
+              type='submit'
+              classButton='mt-[20px]'
+              loading={loading}
+              isDisabled={loading}
             >
-              Don't have an account yet?
-            </Link>
-          </div>
-          
-        </form>
+              Login
+            </Button>
+            <div className="flex justify-between mt-4">
+              <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all">Forgot Password ?</span>
+              <Link 
+                to='/signup'
+                className="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all"
+              >
+                Don't have an account yet?
+              </Link>
+            </div>
+
+          </form>
         </div>
-        
       </div>
     </div>
   )
