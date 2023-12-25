@@ -2,7 +2,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import axios from "axios";
 
-const baseUrlContacts = "https://connections-api.herokuapp.com";
+const baseUrlContacts = "https://65145defdc3282a6a3cd104f.mockapi.io/api/phonebook";
+// const baseUrlContacts = "https://connections-api.herokuapp.com";
 const baseUrlAuth = "https://connections-api.herokuapp.com/users";
 
 export const fetchContacts = createAsyncThunk(
@@ -54,7 +55,7 @@ export const addContact = createAsyncThunk(
             Authorization: `Bearer ${token}`,
           },
           body: {
-            contact,
+            contact
           }
         })
         Notify.success('Contacto Agregado con exito');  

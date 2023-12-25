@@ -22,7 +22,7 @@ const Input = ({
   return (
     <div className="relative w-full group">
       <div className={`${classInput ? classInput : ''} flex items-center gap-[14px] border-2 py-2 px-3 rounded-lg items-center`}>
-        {children}
+        <span className='text-[#9ca3af]'>{children}</span>
         <input
           id={id}
           className={`w-full text-sm bg-transparent ${ error ? 'border-red-400': '' } appearance-none focus:outline-none focus:ring-0 placeholder:text-transparent peer`}
