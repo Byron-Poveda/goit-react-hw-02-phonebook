@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import Contacs from '../contacts/Contacts';
-import Button from 'components/button/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts, deleteContact } from 'redux/thunks';
+import Loader from 'components/Loader/Loader';
+import Contact from '../Contact/Contact';
 const ContactList = () => {
   const dispatch = useDispatch()
   const contactList = useSelector((state) => state.phonebook.contacts)
@@ -13,10 +13,6 @@ const ContactList = () => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log("loader:", loader)
-  }, [loader]);
-
   const contactsLength = []
   contactList.map(contact => (
         contact.name.toLowerCase().includes(filter.toLowerCase())) 
@@ -25,27 +21,21 @@ const ContactList = () => {
   return (
     <>
     {
-      loader ? <h1>Loading...</h1> : 
-      <>
-      <div>Contactos encontrados: <span>{contactsLength.length}</span></div>
-      <ul>
-        {contactList.map(contact => (
-          contact.name.toLowerCase().includes(filter.toLowerCase()) ? <li key={contact?.id || ''}>
-          <Contacs
-            name={contact?.name || ''}
-            number={contact?.phone || ''}
-          />
-          <Button
-            type={'button'}
-            text={'Delete'}
-            onClick={() => {
-              dispatch(deleteContact(contact?.id || ''));
-            }}
-          />
-        </li> : ''
-        ))}
-      </ul>
-      </>
+      loader ? <Loader variant='circle' fill='#000'/> : 
+      <div className='flex flex-col gap-[20px]'>
+        <div className='flex items-center gap-[5px]'>  
+          <span className='text-[18px] font-bold'>Contactos encontrados:</span>
+          <span className='font-rubik text-[22px] font-bold'>{contactsLength.length}</span>
+        </div>
+        <ul className='p-[5px] flex flex-col gap-[10px] max-h-[40vh] overflow-y-auto overflow-x-hidden'>
+          {contactList.map((contact) => (
+            contact.name.toLowerCase().includes(filter.toLowerCase()) ? 
+            <li key={contact.id}>
+              <Contact contact={contact} />
+            </li> : ''
+          ))}
+        </ul>
+      </div>
     }
     </>
   );

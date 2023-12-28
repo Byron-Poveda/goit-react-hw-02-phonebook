@@ -56,10 +56,10 @@ function SignUp() {
                                 required
                                 disabled={loading}
                                 type='text'
-                                autoComplete="username"
+                                autoComplete="on"
                                 onChange={(e)=>setFirstName(e.target.value)}
                                 placeholder='First Name'
-                                classInput='bg-white'
+                                classWrapper='bg-white'
                               >
                                 <FontAwesomeIcon icon={faUser} className='text-[#9ca3af]'></FontAwesomeIcon>
                               </Input>
@@ -70,10 +70,10 @@ function SignUp() {
                                     required
                                     disabled={loading}
                                     type='text'
-                                    autoComplete="family-name"
+                                    autoComplete="on"
                                     onChange={(e)=>setLastName(e.target.value)}
                                     placeholder='Last Name'
-                                    classInput='bg-white'
+                                    classWrapper='bg-white'
                                   >
                                     <FontAwesomeIcon icon={faUser} className='text-[#9ca3af]'></FontAwesomeIcon>
                               </Input>
@@ -85,10 +85,10 @@ function SignUp() {
                                   modelValue={email}
                                   disabled={loading}
                                   type='email'
-                                  autoComplete="email"
+                                  autoComplete="on"
                                   onChange={(e)=>setEmail(e.target.value)}
                                   placeholder='Email'
-                                  classInput='bg-white'
+                                  classWrapper='bg-white'
                                 >
                                   <FontAwesomeIcon icon={faAt} className='text-[#9ca3af]'></FontAwesomeIcon>
                             </Input>
@@ -104,7 +104,7 @@ function SignUp() {
                                 autoComplete="new-password"
                                 onChange={(e)=>setPassword(e.target.value)}
                                 placeholder='Password'
-                                classInput='bg-white'
+                                classWrapper='bg-white'
                                 onFocus={()=>{setErrors('')}}
                                 error={errors ? true : false}
                                 tooltipText={errors}

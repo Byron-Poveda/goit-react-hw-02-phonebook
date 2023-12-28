@@ -12,20 +12,22 @@ const Input = ({
   children = null,
   type = 'text',
   autoComplete = '',
+  classWrapper = '',
   classInput = '',
   error = false,
   onChange = ()=>{},
   onFocus = ()=>{},
   placeholder = "",
+  variant = '',
 }) => {
 
   return (
     <div className="relative w-full group">
-      <div className={`${classInput ? classInput : ''} flex items-center gap-[14px] border-2 py-2 px-3 rounded-lg items-center`}>
-        <span className='text-[#9ca3af]'>{children}</span>
+      <div className={`${classWrapper ? classWrapper : ''} ${variant === 'white' ? 'border border-[#ffffff65]' : ''} flex items-center gap-[14px] border-2 py-2 px-3 rounded-lg items-center`}>
+        <span className={`text-[#9ca3af] ${ variant === 'white' ? '!text-white' : '' }`}>{children}</span>
         <input
           id={id}
-          className={`w-full text-sm bg-transparent ${ error ? 'border-red-400': '' } appearance-none focus:outline-none focus:ring-0 placeholder:text-transparent peer`}
+          className={`w-full text-sm bg-transparent ${variant === 'white' ? '!text-white' : ''} ${ error ? 'border-red-400': '' } appearance-none focus:outline-none focus:ring-0 placeholder:text-transparent peer ${classInput ? classInput : ''}`}
           type={type}
           value={error ? '' : modelValue}
           required={required}
@@ -37,7 +39,7 @@ const Input = ({
         />
       <label
         id={id}
-        className={`absolute text-sm duration-300 transform -translate-y-[22px] scale-90 origin-[0] peer-focus:font-medium ${children ? 'peer-focus:left-0' : ''} peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-[22px] ${children ? 'peer-focus:translate-x-[12px]' : ''} z-[2] pointer-events-none top-[9px] text-[#9ca3af] cursor-text ${children ? 'left-[38px]' : ''} ${modelValue ? 'left-[12px] font-medium scale-75' : ''}`}
+        className={`${variant === 'white' ? '!text-white' : ''} absolute text-sm duration-300 transform -translate-y-[22px] scale-90 origin-[0] peer-focus:font-medium ${children ? 'peer-focus:left-0' : ''} peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-[22px] ${children ? 'peer-focus:translate-x-[12px]' : ''} z-[2] pointer-events-none top-[9px] text-[#9ca3af] cursor-text ${children ? 'left-[38px]' : ''} ${modelValue ? 'left-[12px] font-medium scale-75' : ''}`}
       >
         { placeholder } <span>{required ? '*' : ''}</span>
       </label>
@@ -59,7 +61,9 @@ Input.propTypes = {
   children: PropTypes.node,
   type: PropTypes.string,
   autoComplete: PropTypes.string,
+  classWrapper: PropTypes.string,
   classInput: PropTypes.string,
+  variant: PropTypes.string,
   error: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   onFocus: PropTypes.func,

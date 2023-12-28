@@ -11,7 +11,7 @@ const Button = ({ type = '', isDisabled = false, classButton = '', classText = '
       className={`${classButton ? classButton : ''} disabled:opacity-[.7] h-[40px] flex justify-center items-center w-full bg-phonebook-indigo rounded-lg hover:bg-phonebook-indigo-dark hover:-translate-y-1 transition-all duration-500`}
     >
       {loading ? 
-      <Loader width='40px' height='40px'/>:
+      <Loader variant='circle' width='40px' height='40px'/>:
       <span className={`${classText} text-white font-semibold`}>{ children }</span>
       }
     </button>

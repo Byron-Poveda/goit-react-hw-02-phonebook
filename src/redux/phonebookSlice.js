@@ -11,12 +11,6 @@ export const phonebookSlice = createSlice({
   name: "phonebook",
   initialState,
   reducers: {
-    // initLoading:(state, action) => {
-    //   state.isLoading = action.payload
-    // },
-    // setContacts: (state, action) => {
-    //   state.contacts = action.payload.contacts;
-    // },
     searchContact: (state, action) => {
       state.filter = action.payload 
     },

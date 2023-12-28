@@ -42,7 +42,7 @@ function Login() {
           </div>
         </div>
       </div>
-      <div className="flex w-full md:w-1/2 justify-center items-center bg-white">
+      <div className="flex w-full md:w-1/2 justify-center items-center bg-gray-100">
         <div className="w-full px-[20px]">
           <form onSubmit={submitForm} className="bg-white border border-phonebook-indigo-dark rounded-md shadow-2xl p-5 min-w-[340px] max-w-[480px] my-0 mx-auto">
             <h1 className="text-gray-800 font-bold text-2xl mb-1">Hello!</h1>
@@ -53,6 +53,7 @@ function Login() {
                 required
                 disabled={loading}
                 type='email'
+                autoComplete='on'
                 onChange={(e)=>setEmail(e.target.value)}
                 placeholder='Email Address'
               >

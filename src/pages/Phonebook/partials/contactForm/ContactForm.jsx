@@ -6,12 +6,14 @@ import { addContact } from 'redux/thunks';
 import { Notify } from 'notiflix';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPhone, faUser } from '@fortawesome/free-solid-svg-icons';
-import { nanoid } from '@reduxjs/toolkit';
+import { useDeviceDetect } from 'hooks/deviceDetect/useDeviceDetect';
 
 
 const ContactForm = () => {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
+
+  const { isMobile } = useDeviceDetect()
 
   const dispatch = useDispatch();
   const listContacts = useSelector((state) => state.phonebook.contacts)
@@ -29,7 +31,7 @@ const ContactForm = () => {
       return
     }
 
-    dispatch(addContact({name, phone, id: nanoid(), createdAt: new Date()}))
+    dispatch(addContact({name, number: phone}))
     setName('')
     setPhone('')
   };
@@ -41,6 +43,8 @@ const ContactForm = () => {
         modelValue={name}
         onChange={(e)=>setName(e.target.value)}
         autoComplete={'off'}
+        required
+        variant={isMobile ? '' :'white'}
         placeholder={'Name'}
         title={
           "Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
@@ -51,7 +55,9 @@ const ContactForm = () => {
       <Input
         type={'number'}
         name={'phone'}
+        variant={isMobile ? '' :'white'}
         placeholder={'Phone'}
+        required
         onChange={(e)=>setPhone(e.target.value)}
         modelValue={phone}
       >

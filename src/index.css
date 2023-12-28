@@ -2,6 +2,21 @@
     font-family: rubik;
     src: url(./assets/Fonts/RubikDoodleShadow-Regular.ttf);
 }
+
+::-webkit-scrollbar {
+    width: 6px; 
+}
+
+::-webkit-scrollbar-track {
+    background: lightgray;
+    border-radius: 5px; 
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #726d6d; 
+    border-radius: 5px; 
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
