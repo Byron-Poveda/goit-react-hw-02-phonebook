@@ -8,11 +8,14 @@ import { loginUser } from 'redux/thunks'
 import { Notify } from 'notiflix'
 import { globalIcons } from '../../assets/globalIcons.js'
 import Button from 'components/button/Button.jsx'
+import { useDeviceDetect } from 'hooks/deviceDetect/useDeviceDetect.jsx'
 
 function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const loading = useSelector(state => state.auth.isLoading)
+
+  const { isMobile } = useDeviceDetect()
 
   const dispatch = useDispatch()
 
@@ -44,7 +47,18 @@ function Login() {
       </div>
       <div className="flex w-full md:w-1/2 justify-center items-center bg-gray-100">
         <div className="w-full px-[20px]">
-          <form onSubmit={submitForm} className="bg-white border border-phonebook-indigo-dark rounded-md shadow-2xl p-5 min-w-[340px] max-w-[480px] my-0 mx-auto">
+        {isMobile && <h1 className="text-black text-center font-bold font-rubik"
+          style={{ fontSize: 'clamp(28px, 10vw, 48px)' }}
+          >
+            Contacts 
+          <span className='ml-[7px] text-phonebook-indigo-dark text-[56px] uppercase'
+            style={{ fontSize: 'clamp(28px, 10vw, 48px)' }}
+          >
+            App
+          </span>
+        </h1>
+        }
+          <form onSubmit={submitForm} className="bg-white border border-phonebook-indigo-dark rounded-md shadow-2xl p-5 min-w-[206px] max-w-[480px] my-0 mx-auto">
             <h1 className="text-gray-800 font-bold text-2xl mb-1">Hello!</h1>
             <p className="text-sm font-normal text-gray-600 mb-8">Welcome Back</p>
             <div className='flex flex-col gap-[20px]'>
@@ -78,7 +92,7 @@ function Login() {
             >
               Login
             </Button>
-            <div className="flex justify-between mt-4">
+            <div className="flex justify-between mt-4 max-sm:flex-col max-sm:gap-[20px]">
               <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all">Forgot Password ?</span>
               <Link 
                 to='/signup'
