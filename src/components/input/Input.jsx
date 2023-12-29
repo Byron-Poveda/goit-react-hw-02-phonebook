@@ -23,7 +23,7 @@ const Input = ({
 
   return (
     <div className="relative w-full group">
-      <div className={`${classWrapper ? classWrapper : ''} ${variant === 'white' ? 'border border-[#ffffff65]' : ''} flex items-center gap-[14px] border-2 py-2 px-3 rounded-lg items-center`}>
+      <div className={`${classWrapper ? classWrapper : ''} ${variant === 'white' ? 'border border-[#ffffff65]' : 'border-[#cdcdcd9c]'} flex items-center gap-[14px] border-2 py-2 px-3 rounded-lg items-center`}>
         <span className={`text-[#9ca3af] ${ variant === 'white' ? '!text-white' : '' }`}>{children}</span>
         <input
           id={id}

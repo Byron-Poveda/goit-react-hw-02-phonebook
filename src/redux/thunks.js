@@ -65,6 +65,29 @@ export const addContact = createAsyncThunk(
     }
   }
   )
+
+  export const editContact = createAsyncThunk(
+  "contacts/editContact",
+  async ({id, contact}, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.token;
+      const response = await axios.patch(
+        `${baseUrlContacts}/contacts/${id}`, contact,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+        Notify.success('Contacto actualizado con exito');  
+        return  response.data
+      } catch (e) {
+        console.log(e)
+        Notify.failure('Error al tratar de actualizar un contacto'); 
+        return thunkAPI.rejectWithValue(e.message)
+    }
+  }
+  )
   
   // auth
 

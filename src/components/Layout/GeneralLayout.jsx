@@ -17,7 +17,7 @@ const GeneralLayout = ({ children }) => {
 
 
   const showGoBack = useMemo(() => {
-    const ROUTES_WHERE_NOT_SHOWN_HEADER_AUTH = ['/login', '/phonebook'];
+    const ROUTES_WHERE_NOT_SHOWN_HEADER_AUTH = ['/login', '/phonebook', '/'];
 
     const shouldHide = ROUTES_WHERE_NOT_SHOWN_HEADER_AUTH.some(route => {
       return location.pathname === route;

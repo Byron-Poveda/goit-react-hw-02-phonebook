@@ -46,9 +46,6 @@ const ContactForm = () => {
         required
         variant={isMobile ? '' :'white'}
         placeholder={'Name'}
-        title={
-          "Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-        }
       >
         <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
       </Input>
