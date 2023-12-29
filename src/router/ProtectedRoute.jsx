@@ -8,7 +8,6 @@ const ProtectedRoute = ({ title, redirectRoute, element, checkAuth }) => {
   const [token, setToken] = useState(tokenStore); 
   
     useEffect(()=>{
-      console.log(token.value, tokenStore)
       setToken(tokenStore)
     },[tokenStore, token.value])
   

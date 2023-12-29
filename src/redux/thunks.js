@@ -82,7 +82,6 @@ export const addContact = createAsyncThunk(
         Notify.success('Contacto actualizado con exito');  
         return  response.data
       } catch (e) {
-        console.log(e)
         Notify.failure('Error al tratar de actualizar un contacto'); 
         return thunkAPI.rejectWithValue(e.message)
     }
@@ -153,8 +152,6 @@ export const signUpUser = createAsyncThunk(
       }
 
       const response = await axios.post(`${baseUrlAuth}/signup`, data);
-
-      console.log(response.status)
 
       if (response.status !== 201) {
         return thunkAPI.rejectWithValue('Error en SignUp');
