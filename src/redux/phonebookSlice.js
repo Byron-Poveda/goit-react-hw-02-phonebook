@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchContacts, deleteContact, addContact } from "./thunks";
+import { fetchContacts, deleteContact, addContact, editContact } from "./thunks";
 const initialState = {
   contacts: [],
   isLoading: false,
@@ -49,6 +49,24 @@ export const phonebookSlice = createSlice({
       state.isLoading = false
     },
     [addContact.rejected](state, action) {
+      state.error = action.payload
+      state.isLoading = false
+    },
+    [editContact.pending](state) {
+      state.isLoading = true
+      state.error = null
+    },
+    [editContact.fulfilled](state, action) {
+      const editedContact = action.payload;
+      const index = state.contacts.findIndex((contact) => contact.id === editedContact.id);
+    
+      if (index !== -1) {
+        state.contacts[index] = editedContact;
+      }
+    
+      state.isLoading = false;
+    },
+    [editContact.rejected](state, action) {
       state.error = action.payload
       state.isLoading = false
     },

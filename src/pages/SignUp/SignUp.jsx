@@ -5,7 +5,6 @@ import Input from 'components/input/Input'
 import { Notify } from 'notiflix'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { signUpUser } from 'redux/thunks'
 
 function SignUp() {
@@ -114,7 +113,24 @@ function SignUp() {
                           </div>
                       <div className="flex items-center pl-[5px]">
                           <input type="checkbox" required className="mr-2 focus:ring-0 rounded" />
-                          <label className="text-gray-700">I accept the <Link className="text-blue-600 hover:text-blue-700 hover:underline">terms</Link> and <Link className="text-blue-600 hover:text-blue-700 hover:underline">privacy policy</Link></label>
+                          <label className="text-gray-700">I accept the 
+                            <a 
+                              href='https://www.whatsapp.com/legal/terms-of-service?lang=es_LA' 
+                              target='_blank' 
+                              rel="noreferrer"
+                              className="text-blue-600 hover:text-blue-700 hover:underline"
+                            >
+                              terms
+                            </a> 
+                            and 
+                            <a href='https://faq.whatsapp.com/595724415641642' 
+                              target='_blank' 
+                              rel="noreferrer"
+                              className="text-blue-600 hover:text-blue-700 hover:underline"
+                            >
+                              privacy policy
+                            </a>
+                          </label>
                       </div>
                       </div>
                       <div className="flex">
