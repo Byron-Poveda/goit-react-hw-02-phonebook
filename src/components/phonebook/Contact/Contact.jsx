@@ -91,7 +91,7 @@ function Contact({ contact }) {
           {!openMenu ?
             <p>{contact.number}</p>
             :
-            <div className='w-full flex gap-[10px] items-center' onClick={()=>confirmDelete(contact)}>
+            <div className='w-full flex gap-[10px] items-center cursor-pointer' onClick={()=>confirmDelete(contact)}>
               <span>Delete</span>
               <FontAwesomeIcon icon={faTrash} />
             </div>}
