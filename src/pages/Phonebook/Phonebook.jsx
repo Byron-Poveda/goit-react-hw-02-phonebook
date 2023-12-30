@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import ContactForm from './partials/contactForm/ContactForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOutUser } from 'redux/thunks';
@@ -15,11 +15,61 @@ const Phonebook = () => {
   const [addContactHover, setAddContactHover] = useState(false)
   const [isPhonebook, setIsPhonebook] = useState(false)
   const [isAddContacts, setIsAddContacts] = useState(true)
-  
+  const inactivityTimeoutRef = useRef(null);
+  let removeTokenTimeout;
+
   const loading = useSelector(state => state.auth.isLoading)
+  const token = useSelector(state => state.auth.token);
   
   const dispatch = useDispatch()
   const { isMobile } = useDeviceDetect()
+
+  const resetInactivityTimeout = useCallback(() => {
+    clearTimeout(inactivityTimeoutRef.current);
+
+    inactivityTimeoutRef.current = setTimeout(() => {
+      dispatch(logOutUser());
+
+    }, 3600000);
+
+    startRemoveTokenTimeout();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
+
+  const startRemoveTokenTimeout = () => {
+    clearTimeout(removeTokenTimeout);
+
+    removeTokenTimeout = setTimeout(() => {
+      localStorage.removeItem('token');
+    }, 3600000); 
+  };
+
+  useEffect(() => {
+    const handleInteraction = () => {
+      resetInactivityTimeout();
+    };
+
+    const handleKeyDown = event => {
+      handleInteraction();
+    };
+
+    document.addEventListener('mousemove', handleInteraction);
+    document.addEventListener('keydown', handleKeyDown);
+
+    resetInactivityTimeout();
+
+    return () => {
+      clearTimeout(removeTokenTimeout);
+      clearTimeout(inactivityTimeoutRef.current);
+      document.removeEventListener('mousemove', handleInteraction);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [
+    dispatch,
+    token,
+    resetInactivityTimeout,
+    removeTokenTimeout,
+  ]);
 
     const handlePages = () => {
         if(isPhonebook) {
