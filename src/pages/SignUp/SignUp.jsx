@@ -118,7 +118,7 @@ function SignUp() {
                               href='https://www.whatsapp.com/legal/terms-of-service?lang=es_LA' 
                               target='_blank' 
                               rel="noreferrer"
-                              className="text-blue-600 hover:text-blue-700 hover:underline"
+                              className="text-blue-600 hover:text-blue-700 hover:underline mx-[5px]"
                             >
                               terms
                             </a> 
@@ -126,7 +126,7 @@ function SignUp() {
                             <a href='https://faq.whatsapp.com/595724415641642' 
                               target='_blank' 
                               rel="noreferrer"
-                              className="text-blue-600 hover:text-blue-700 hover:underline"
+                              className="text-blue-600 hover:text-blue-700 hover:underline ml-[5px]"
                             >
                               privacy policy
                             </a>
