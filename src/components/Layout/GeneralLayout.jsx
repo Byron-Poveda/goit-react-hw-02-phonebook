@@ -4,13 +4,14 @@ import { useSelector } from 'react-redux';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { useGoBack } from '../../hooks/History/useHistory'
 import { globalIcons } from 'assets/globalIcons';
-import { useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { useDeviceDetect } from 'hooks/deviceDetect/useDeviceDetect';
 
 const GeneralLayout = ({ children }) => {
   
   // const loading = useSelector(state => state.auth.isLoading);
-  const error = useSelector(state => state.auth.error);
+  const errorAuth = useSelector(state => state.auth.error);
+  const errorPhonebook = useSelector(state => state.phonebook.error);
   const location = useLocation();
   const history = useGoBack()
   const { isMobile } = useDeviceDetect()
@@ -27,14 +28,27 @@ const GeneralLayout = ({ children }) => {
   }, [location.pathname]);
 
   useEffect(() => {
-    if (error)
-      return Notify.failure(error, {
+    if (errorAuth)
+      Notify.failure(errorAuth, {
         fontSize: '16px',
         fontFamily: 'Roboto',
         cssAnimationStyle: 'from-right',
         timeout: 900,
       });
-  }, [error]);
+    if (errorPhonebook)
+      Notify.failure(errorPhonebook, {
+        fontSize: '16px',
+        fontFamily: 'Roboto',
+        cssAnimationStyle: 'from-right',
+        timeout: 900,
+      });
+    if(errorPhonebook === 'Please authenticate') {
+      console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+      localStorage.removeItem('token');
+      localStorage.removeItem('userCurrent');
+      return window.location.reload()
+    }
+  }, [errorAuth, errorPhonebook]);
 
   return (
     <div className='overflow-hidden w-full h-screen'>

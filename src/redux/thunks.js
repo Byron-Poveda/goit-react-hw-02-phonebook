@@ -18,8 +18,7 @@ export const fetchContacts = createAsyncThunk(
       })
       return  response.data
     } catch (e) {
-      Notify.failure('Error al treaer los contactos');
-      return thunkAPI.rejectWithValue(e.message)
+      return thunkAPI.rejectWithValue(e.response.data.message)
     }
   }
 )
@@ -38,8 +37,7 @@ export const deleteContact = createAsyncThunk(
           Notify.success('Contacto Eliminado');  
           return  response.data
         } catch (e) {
-          Notify.failure('Error al tratar de eliminar un contacto'); 
-          return thunkAPI.rejectWithValue(e.message)
+          return thunkAPI.rejectWithValue(e.response.data.message)
     }
   }
   )
@@ -60,8 +58,7 @@ export const addContact = createAsyncThunk(
         Notify.success('Contacto Agregado con exito');  
         return  response.data
       } catch (e) {
-        Notify.failure('Error al tratar de agregar un contacto'); 
-        return thunkAPI.rejectWithValue(e.message)
+        return thunkAPI.rejectWithValue(e.response.data.message)
     }
   }
   )
@@ -82,8 +79,7 @@ export const addContact = createAsyncThunk(
         Notify.success('Contacto actualizado con exito');  
         return  response.data
       } catch (e) {
-        Notify.failure('Error al tratar de actualizar un contacto'); 
-        return thunkAPI.rejectWithValue(e.message)
+        return thunkAPI.rejectWithValue(e.response.data.message)
     }
   }
   )
@@ -184,7 +180,7 @@ export const logOutUser = createAsyncThunk(
 
       return '';
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.response.data.message);
+      return thunkAPI.rejectWithValue(e.response.data.message.message);
     }
   }
 );

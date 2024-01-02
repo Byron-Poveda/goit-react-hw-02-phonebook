@@ -97,7 +97,7 @@ const Phonebook = () => {
   return (
     <div className='flex w-full h-screen justify-center relative'>
       {isAddContacts && 
-        <div className='w-1/2 px-[35px] flex justify-center items-center relative bg-phonebook-indigo max-md:w-full max-md:bg-gray-100'>
+        <div className='w-1/2 px-[35px] flex justify-center items-center relative bg-[#9994f2] max-md:w-full max-md:bg-gray-100'>
           <div className='z-[2] relative max-w-[400px] w-full'>
             <h1 className='font-rubik text-white max-md:text-black text-[42px] mb-[15px]'>Phonebook</h1>
             <ContactForm />
