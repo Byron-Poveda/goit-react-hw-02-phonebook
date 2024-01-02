@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { useGoBack } from '../../hooks/History/useHistory'
 import { globalIcons } from 'assets/globalIcons';
-import { Navigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useDeviceDetect } from 'hooks/deviceDetect/useDeviceDetect';
 
 const GeneralLayout = ({ children }) => {
